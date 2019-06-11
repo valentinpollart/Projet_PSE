@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /home/magister/Downloads/clion-2018.3.4/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/bin/cmake -E remove -f
+RM = /home/magister/Downloads/clion-2018.3.4/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/magister/Documents/PSE/Projet
+CMAKE_SOURCE_DIR = /home/magister/Documents/Programmation_Système/Projet_PSE/Projet
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/magister/Documents/PSE/Projet/cmake-build-debug
+CMAKE_BINARY_DIR = /home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/magister/Documents/PSE/Projet/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/magister/Downloads/clion-2018.3.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/magister/Downloads/clion-2018.3.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles /home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/CMakeFiles /home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,6 +123,19 @@ Projet_PSE/fast:
 	$(MAKE) -f CMakeFiles/Projet_PSE.dir/build.make CMakeFiles/Projet_PSE.dir/build
 .PHONY : Projet_PSE/fast
 
+#=============================================================================
+# Target rules for targets named Test_Serveur
+
+# Build rule for target.
+Test_Serveur: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Test_Serveur
+.PHONY : Test_Serveur
+
+# fast build rule for target.
+Test_Serveur/fast:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/build
+.PHONY : Test_Serveur/fast
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -150,6 +163,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/Projet_PSE.dir/build.make CMakeFiles/Projet_PSE.dir/main.c.s
 .PHONY : main.c.s
 
+serveur.o: serveur.c.o
+
+.PHONY : serveur.o
+
+# target to build an object file
+serveur.c.o:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/serveur.c.o
+.PHONY : serveur.c.o
+
+serveur.i: serveur.c.i
+
+.PHONY : serveur.i
+
+# target to preprocess a source file
+serveur.c.i:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/serveur.c.i
+.PHONY : serveur.c.i
+
+serveur.s: serveur.c.s
+
+.PHONY : serveur.s
+
+# target to generate assembly for a file
+serveur.c.s:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/serveur.c.s
+.PHONY : serveur.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -157,11 +197,15 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... Projet_PSE"
 	@echo "... edit_cache"
+	@echo "... Projet_PSE"
+	@echo "... Test_Serveur"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... serveur.o"
+	@echo "... serveur.i"
+	@echo "... serveur.s"
 .PHONY : help
 
 

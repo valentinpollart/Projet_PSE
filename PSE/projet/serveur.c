@@ -1,4 +1,4 @@
-#include "include/pse.h"
+#include "pse.h"
 
 #define    CMD      "serveur"
 
@@ -6,27 +6,27 @@ void *communicationThread(void *arg);
 int remiseAZeroJournal(int fdJournal);
 void createPool(int slaveCount);
 DataThread *findFreeDataThread();
-
-
+void closeServer();
+void *closingThread();
 
 int fdJournal;
 short port;
 sem_t MainSem;
 
-
+typedef enum{
+    free,
+    busy,
+}playerState;
 
 typedef struct _player{
     int id;
-    char pseudo[20];
-    sem_t state;
+    char[20] pseudo
+    playerState state;
     DataThread* handler;
-    struct _player *next;
+    _player next;
 }player;
 
 player* playerList;
-
-player* bindPlayerToThread(DataThread *dataThread);
-void showPlayerList(player* player);
 
 int main(int argc, char *argv[]) {
 
@@ -119,7 +119,7 @@ void *communicationThread(void *arg) {
     DataThread *dataThread;
     char ligne[LIGNE_MAX];
     int lgLue;
-    bool play = false;
+
     dataThread = (DataThread *)arg;
     char port_str[40];
     sprintf(port_str,"%d",port);
@@ -130,8 +130,9 @@ void *communicationThread(void *arg) {
         dataThread->spec.libre = FAUX;
         player* Player = bindPlayerToThread(dataThread);
         ecrireLigne(dataThread->spec.canal, "Veuillez saisir votre pseudo (20 caractères max) : ");
-        lireLigne(dataThread->spec.canal, Player->pseudo);
+        lireLigne(dataThread->spec.canal, dataThread->spec.pseudo);
         while (!dataThread->spec.libre) {
+            lobby(player);
             //DataThread *currentThread = listeDataThread;
             player *currentPlayer = playerList;
             ecrireLigne(dataThread->spec.canal, "Numéro du joueur\t\tPseudo\t\tStatut\n");
@@ -141,7 +142,7 @@ void *communicationThread(void *arg) {
                 ecrireLigne(dataThread->spec.canal, "Pour défier un joueur, tappez son numéro. Pour rafraichir la liste, tappez r. Pour quitter le serveur, tappez q");
                 lireLigne(dataThread->spec.canal,ligne);
                 if (strcmp(ligne,"q") == 0){
-                    pthread_exit(NULL);
+                    exit();
                 }
                 else if (strcmp(ligne,"r")){
                     showPlayerList(Player);
@@ -166,37 +167,37 @@ void *communicationThread(void *arg) {
 
 
 
-            lgLue = lireLigne(dataThread->spec.canal, ligne);
-            if (lgLue < 0)
-              erreur_IO("lireLigne");
-            else if (lgLue == 0)
-              erreur("arret client\n");
+        lgLue = lireLigne(dataThread->spec.canal, ligne);
+        if (lgLue < 0)
+          erreur_IO("lireLigne");
+        else if (lgLue == 0)
+          erreur("arret client\n");
 
-            printf("%s: reception %d octets : \"%s\"\n", CMD, lgLue, ligne);
+        printf("%s: reception %d octets : \"%s\"\n", CMD, lgLue, ligne);
 
-            if (strcmp(ligne, "fin") == 0) {
-                printf("serveur: fin client\n");
-                dataThread->spec.libre = VRAI;
-            }
-            else if (strcmp(ligne, "init") == 0) {
-              printf("serveur: remise a zero journal\n");
-              fdJournal = remiseAZeroJournal(fdJournal);
-            }
-            else if (strcmp(ligne, "fin_serveur") == 0) {
-              printf("serveur: extinction serveur\n");
-              dataThread->spec.libre = VRAI;
-              if (close(dataThread->spec.canal) == -1)
-                    erreur_IO("fermeture canal");
-              execve("client",args,NULL);
-              perror ("execve");
-                    exit (EXIT_FAILURE);
-            }
-            else if (ecrireLigne(fdJournal, ligne) != -1) {
-                printf("serveur: ligne de %d octets ecrite dans journal\n", lgLue);
-            }
-            else
-              erreur_IO("ecriture journal");
-            } 	// fin while
+        if (strcmp(ligne, "fin") == 0) {
+            printf("serveur: fin client\n");
+            dataThread->spec.libre = VRAI;
+        }
+        else if (strcmp(ligne, "init") == 0) {
+          printf("serveur: remise a zero journal\n");
+          fdJournal = remiseAZeroJournal(fdJournal);
+        }
+        else if (strcmp(ligne, "fin_serveur") == 0) {
+          printf("serveur: extinction serveur\n");
+          dataThread->spec.libre = VRAI;
+          if (close(dataThread->spec.canal) == -1)
+                erreur_IO("fermeture canal");
+          execve("client",args,NULL);
+          perror ("execve");
+                exit (EXIT_FAILURE);
+        }
+        else if (ecrireLigne(fdJournal, ligne) != -1) {
+            printf("serveur: ligne de %d octets ecrite dans journal\n", lgLue);
+        }
+        else
+          erreur_IO("ecriture journal");
+        } 	// fin while
         sem_post(&MainSem);
 
     }
@@ -275,12 +276,12 @@ player* bindPlayerToThread(DataThread *dataThread){
     return currentPlayer;
 }
 
-void showPlayerList(player* Player){
+void showPlayerList(player* player){
     player* currentPlayer = playerList;
     char ligne[LIGNE_MAX];
     while (currentPlayer != NULL) {
-        sprintf(ligne, "%d\t\t%s\t\t%s\n",currentPlayer->id, currentPlayer->pseudo);
-        ecrireLigne(Player->handler->spec.canal, ligne);
+        sprintf(ligne, "%d\t\t%s\t\t%s\n",currentPlayer->id, currentPlayer->pseudo, currentPlayer->state);
+        ecrireLigne(player->handler->spec.canal, ligne);
         currentPlayer = currentPlayer->next;
     }
 }
