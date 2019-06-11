@@ -136,14 +136,32 @@ void *communicationThread(void *arg) {
                 //DataThread *currentThread = listeDataThread;
                 player *currentPlayer = playerList;
                 ecrireLigne(dataThread->spec.canal, "Numéro du joueur\t\tPseudo\t\tStatut\n");
-                while (currentPlayer != NULL) {
-                    sprintf(ligne, "%d\t\t%s\t\t%s\n",currentPlayer->id, currentPlayer->pseudo, currentPlayer->state);
-                    ecrireLigne(dataThread->spec.canal, ligne);
-                    currentPlayer = currentPlayer->next;
-                }
-                ecrireLigne(dataThread->spec.canal, "Pour défier un joueur, tappez son numéro. Pour rafraichir la liste, tappez r. Pour quitter le serveur, tappez q");
-                lireLigne(dataThread->spec.canal,ligne);
+                showPlayerList();
 
+                while(!play){
+                    ecrireLigne(dataThread->spec.canal, "Pour défier un joueur, tappez son numéro. Pour rafraichir la liste, tappez r. Pour quitter le serveur, tappez q");
+                    lireLigne(dataThread->spec.canal,ligne);
+                    if (strcmp(ligne,"q") == 0){
+                        exit();
+                    }
+                    else if (strcmp(ligne,"r")){
+                        showPlayerList(Player);
+                    }
+                    else {
+                        int challengedPlayerId = atoi("ligne");
+                        if (challengedPlayerId > currentPlayer->id) {
+                            ecrireLigne(dataThread->spec.canal, "Entrée incorrecte, veuillez réessayer.");
+                        }
+                        else{
+                            currentPlayer = playerList;
+                            while(currentPlayer->id != challengedPlayerId){
+                                currentPlayer = currentPlayer->next;
+                            }
+                            sendChallenge(currentPlayer);
+                        }
+                    }
+
+                }
 
 
 
@@ -258,6 +276,12 @@ player* bindPlayerToThread(DataThread *dataThread){
     return currentPlayer;
 }
 
-void lobby(player* player){
-
+void showPlayerList(player* player){
+    player* currentPlayer = playerList;
+    char ligne[LIGNE_MAX];
+    while (currentPlayer != NULL) {
+        sprintf(ligne, "%d\t\t%s\t\t%s\n",currentPlayer->id, currentPlayer->pseudo, currentPlayer->state);
+        ecrireLigne(player->handler->spec.canal, ligne);
+        currentPlayer = currentPlayer->next;
+    }
 }
