@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/magister/Documents/PSE/Projet/game.c" "/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles/Test_Serveur.dir/game.c.o"
   "/home/magister/Documents/PSE/Projet/modules/datathread.c" "/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles/Test_Serveur.dir/modules/datathread.c.o"
   "/home/magister/Documents/PSE/Projet/modules/erreur.c" "/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles/Test_Serveur.dir/modules/erreur.c.o"
   "/home/magister/Documents/PSE/Projet/modules/ligne.c" "/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles/Test_Serveur.dir/modules/ligne.c.o"

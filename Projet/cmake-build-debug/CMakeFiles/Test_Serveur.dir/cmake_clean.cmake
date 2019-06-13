@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Test_Serveur.dir/modules/msg.c.o"
   "CMakeFiles/Test_Serveur.dir/modules/resolv.c.o"
   "CMakeFiles/Test_Serveur.dir/serveur.c.o"
+  "CMakeFiles/Test_Serveur.dir/game.c.o"
   "Test_Serveur.pdb"
   "Test_Serveur"
 )

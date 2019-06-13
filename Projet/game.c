@@ -1,79 +1,31 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
-typedef struct _Move{
-    int dst;
-    struct _Move *Suivant;
-}Move;
-
-typedef struct{
-    int Indice;
-	int Indice_Case;
-	int type;
-	int couleur;
-}Piece;
-
-typedef struct{
-	int libre;
-	Piece *Occuppant;
-}Case;
-
-void Init_Board(Case *Plateau);
-void Init_Set_Pieces(Case *Plateau,Piece *Set_Pieces);
-void Afficher_Board(Case *Plateau);
-void Refresh_Move(Case *Plateau,Piece *Set_Pieces,Move **mouvements,int Indice);
-bool Test_Border_Haut1(int Indice);
-bool Test_Border_Bas1(int Indice);
-bool Test_Border_Gauche1(int Indice);
-bool Test_Border_Droit1(int Indice);
-bool Test_Border_Haut2(int Indice);
-bool Test_Border_Bas2(int Indice);
-bool Test_Border_Gauche2(int Indice);
-bool Test_Border_Droit2(int Indice);
-void Bouger_Piece(Case *Plateau,Piece *Set_Pieces,Move **mouvements);
-void Liberer(Move **mouvements,int indice);
-void Init_Mouvements(Move **mouvements);
-bool Test_Echec(Case *Plateau,Piece *Set_Pieces,Move **mouvements,int couleur);
-bool Test_Move_Liste(int Indice,int Ind_Destination,Move **mouvements);
-int Coo_to_Ind(char *code);
-bool Test_Border1(int Indice);
-bool Test_Border2(int Indice);
-void Ajout_Ligne_Gauche(Case *Plateau, Move **mouvements,Piece *Set_Pieces,int Indice_Piece);
-void Ajout_Ligne_Droit(Case *Plateau, Move **mouvements,Piece *Set_Pieces,int Indice_Piece);
-void Ajout_Ligne_Bas(Case *Plateau, Move **mouvements,Piece *Set_Pieces,int Indice_Piece);
-void Ajout_Ligne_Haut(Case *Plateau, Move **mouvements,Piece *Set_Pieces,int Indice_Piece);
-void Ajouter_Diagonale_HGauche(Case *Plateau, Move **mouvements,Piece *Set_Pieces,int Indice_Piece);
-void Ajouter_Diagonale_BGauche(Case *Plateau, Move **mouvements,Piece *Set_Pieces,int Indice_Piece);
-void Ajouter_Diagonale_HDroite(Case *Plateau, Move **mouvements,Piece *Set_Pieces,int Indice_Piece);
-void Ajouter_Diagonale_BDroite(Case *Plateau, Move **mouvements,Piece *Set_Pieces,int Indice_Piece);
-void Afficher_Move(Move **mouvements, int Indice);
-bool Test_Move_Valide(Case *Plateau,Piece *Set_Pieces, Move **mouvements,int Ind_Origine,int Ind_Destination,int Indice_Piece);
-bool Test_Checkmate(Case *Plateau,Piece *Set_Pieces,Move **mouvements,int couleur);
-void Afficher_Move_Valide(Case* Plateau,Piece *Set_Pieces,Move ** mouvements,int Indice);
+#include "game.h"
 
 
 
 
-
-int main(void)
+void *start(void *args)
 {
+    game *Game = (game*)args;
     int fin = 0;
+    int currentPlayer = 0;
 	Case Plateau[64];
 	Piece Set_Pieces[32];
 	Move *mouvements[32];
 	Init_Board(Plateau);
 	Init_Set_Pieces(Plateau,Set_Pieces);
-	Afficher_Board(Plateau);
+	Afficher_Board(Plateau,Game);
+
 	while(fin != 1)
 	{
         Init_Mouvements(mouvements);
-        Bouger_Piece(Plateau,Set_Pieces,mouvements);
-        Afficher_Board(Plateau);
-        printf("Voulez vous continuer ? 0 : OUI | 1 : NON\n");
-        scanf("%d", &fin);
+        fin = Bouger_Piece(Plateau,Set_Pieces,mouvements,Game,currentPlayer);
+        Afficher_Board(Plateau,Game);
+        currentPlayer = !currentPlayer;
 	}
-	return 0;
+	sem_post(&Game->players[0]->gameDone);
+    sem_post(&Game->players[1]->gameDone);
+    pthread_exit(NULL);
+
 }
 
 void Init_Board(Case *Plateau)
@@ -127,19 +79,22 @@ void Init_Set_Pieces(Case *Plateau, Piece *Set_Pieces)
     Plateau[59]= (Case) {.libre = 0,.Occuppant = &Set_Pieces[27]};
 }
 
-void Afficher_Board(Case *Plateau)
+void Afficher_Board(Case *Plateau,game *Game)
 {
+
 	char Type, lettres[]={'a','b','c','d','e','f','g','h'};
-	printf(" ");
-	for(int i = 0;i<=7;i++) printf(" %c",lettres[i]);
-	printf("\n");
+    char ligne[20];
+	sprintf(ligne,"  a b c d e f g h");
+    ecrireLigne(Game->players[0]->handler->spec.canal, ligne);
+    ecrireLigne(Game->players[1]->handler->spec.canal, ligne);
 	for(int i = 1;i <= 8;i++)
 	{
-	    printf(" ");
-        for(int k = 0;k<=7;k++) printf("--");
-        printf("-\n%d",9-i);
+        sprintf(ligne," -----------------");
+        ecrireLigne(Game->players[0]->handler->spec.canal, ligne);
+        ecrireLigne(Game->players[1]->handler->spec.canal, ligne);
 		for (int j = 0;j <= 7;j++)
 		{
+		    sprintf(&ligne[0],"%d",9-i);
 		    if(Plateau[63-8*i+j+1].Occuppant == NULL) Type = ' ';
 		    else
             {
@@ -165,14 +120,15 @@ void Afficher_Board(Case *Plateau)
                     break;
                 }
             }
-            printf("|");
-            printf("%c",Type);
+            sprintf(&ligne[2*j+1],"|");
+            sprintf(&ligne[2*j+2],"%c",Type);
 		}
-        printf("|\n");
+        ecrireLigne(Game->players[0]->handler->spec.canal, ligne);
+        ecrireLigne(Game->players[1]->handler->spec.canal, ligne);
 	}
-	printf(" ");
-    for( int k = 0;k<=7;k++) printf("--");
-    printf("-\n");
+    sprintf(ligne," -----------------");
+    ecrireLigne(Game->players[0]->handler->spec.canal, ligne);
+    ecrireLigne(Game->players[1]->handler->spec.canal, ligne);
 }
 
 void Refresh_Move(Case *Plateau,Piece *Set_Pieces,Move **mouvements,int Indice)
@@ -421,60 +377,87 @@ void Refresh_Move(Case *Plateau,Piece *Set_Pieces,Move **mouvements,int Indice)
 }
 
 
-void Bouger_Piece(Case *Plateau,Piece *Set_Pieces,Move **mouvements)
+int Bouger_Piece(Case *Plateau,Piece *Set_Pieces,Move **mouvements,game *Game, int playing)
 {
     char origine[2],destination[2];
+    char ligne[LIGNE_MAX];
     int Ind_Origine,Ind_Destination,Ind_Piece1,Ind_Piece2=0,libre_temp = 0,couleur_temp;
     Piece *Occupant_Temp;
     bool Test;
-    printf("Veuillez selectionner la piece a deplacer : ");
-    scanf("%s", origine);
+    sprintf(ligne,"Veuillez selectionner la piece a deplacer : ");
+    ecrireLigne(Game->players[playing]->handler->spec.canal, ligne);
+    sprintf(ligne,"waiting input");
+    ecrireLigne(Game->players[playing]->handler->spec.canal, ligne);
+    lireLigne(Game->players[playing]->handler->spec.canal,origine);
     Ind_Origine = Coo_to_Ind(origine);
-    if(Plateau[Ind_Origine].libre == 1)
+    while(Plateau[Ind_Origine].libre == 1)
     {
-        printf("Code non valide.\n");
+        sprintf(ligne,"Code non valide.");
+        ecrireLigne(Game->players[playing]->handler->spec.canal, ligne);
+        sprintf(ligne,"Veuillez selectionner la piece a deplacer : ");
+        ecrireLigne(Game->players[playing]->handler->spec.canal, ligne);
+        sprintf(ligne,"waiting input");
+        ecrireLigne(Game->players[playing]->handler->spec.canal, ligne);
+        lireLigne(Game->players[playing]->handler->spec.canal,origine);
+        Ind_Origine = Coo_to_Ind(origine);
     }
     Ind_Piece1 = Plateau[Ind_Origine].Occuppant->Indice;
     Ind_Piece2 = Ind_Piece1;
     Refresh_Move(Plateau,Set_Pieces,mouvements,Ind_Piece1);
     Afficher_Move_Valide(Plateau,Set_Pieces,mouvements,Ind_Piece1);
-    printf("Veuillez selectionner sa destination : ");
-    scanf("%s", destination);
-    Ind_Destination = Coo_to_Ind(destination);
-    Test = Test_Move_Valide(Plateau,Set_Pieces,mouvements,Ind_Origine,Ind_Destination,Ind_Piece1);
-    if(Test)
-    {
-        Set_Pieces[Ind_Piece1].Indice_Case = Ind_Destination;
-        Plateau[Ind_Origine] = (Case) {.libre = 1,.Occuppant = NULL};
-        Plateau[Ind_Destination]= (Case) {.libre = 0,.Occuppant = &Set_Pieces[Ind_Piece1]};
-        switch(Set_Pieces[Ind_Piece1].couleur)
-        {
-        case 0:
-        if(Test_Echec(Plateau,Set_Pieces,mouvements,1))
-        {
-            if(Test_Checkmate(Plateau,Set_Pieces,mouvements,1))
-            {
-                printf("%d en echec et mat",1);
-            }
-            else{printf("Poire\n");}
-        }
-        break;
-        case 1 :
-        if(Test_Echec(Plateau,Set_Pieces,mouvements,0))
-           {
 
-               if(Test_Checkmate(Plateau,Set_Pieces,mouvements,0))
-               {
-                   printf("%d En echec et mat.\n",0);
-               }
-           }
-        break;
+    sprintf(ligne,"Veuillez selectionner la piece a deplacer : ");
+    ecrireLigne(Game->players[playing]->handler->spec.canal, ligne);
+    sprintf(ligne,"waiting input");
+    ecrireLigne(Game->players[playing]->handler->spec.canal, ligne);
+    lireLigne(Game->players[playing]->handler->spec.canal,destination);
+    Ind_Destination = Coo_to_Ind(destination);
+
+
+    while(Test_Move_Valide(Plateau,Set_Pieces,mouvements,Ind_Origine,Ind_Destination,Ind_Piece1))
+    {
+        sprintf(ligne,"Code non valide.");
+        ecrireLigne(Game->players[playing]->handler->spec.canal, ligne);
+        sprintf(ligne,"Veuillez selectionner sa destination : ");
+        ecrireLigne(Game->players[playing]->handler->spec.canal, ligne);
+        sprintf(ligne,"waiting input");
+        ecrireLigne(Game->players[playing]->handler->spec.canal, ligne);
+        lireLigne(Game->players[playing]->handler->spec.canal,destination);
+        Ind_Destination = Coo_to_Ind(destination);
+    }
+    Set_Pieces[Ind_Piece1].Indice_Case = Ind_Destination;
+    Plateau[Ind_Origine] = (Case) {.libre = 1,.Occuppant = NULL};
+    Plateau[Ind_Destination]= (Case) {.libre = 0,.Occuppant = &Set_Pieces[Ind_Piece1]};
+    switch(Set_Pieces[Ind_Piece1].couleur)
+    {
+    case 0:
+    if(Test_Echec(Plateau,Set_Pieces,mouvements,1))
+    {
+        if(Test_Checkmate(Plateau,Set_Pieces,mouvements,1))
+        {
+            sprintf(ligne,"%d en echec et mat",1);
+            ecrireLigne(Game->players[0]->handler->spec.canal, ligne);
+            ecrireLigne(Game->players[1]->handler->spec.canal, ligne);
+            return 0;
         }
     }
-    else
-    {
-        printf("Code non valide.\n");
+    break;
+    case 1 :
+    if(Test_Echec(Plateau,Set_Pieces,mouvements,0))
+       {
+
+           if(Test_Checkmate(Plateau,Set_Pieces,mouvements,0))
+           {
+               sprintf(ligne,"%d en echec et mat",0);
+               ecrireLigne(Game->players[0]->handler->spec.canal, ligne);
+               ecrireLigne(Game->players[1]->handler->spec.canal, ligne);
+               return 0;
+           }
+       }
+    break;
     }
+
+    return 1;
 }
 
 void Liberer(Move **mouvements,int indice)

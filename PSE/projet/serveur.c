@@ -1,5 +1,6 @@
 #include "pse.h"
 
+
 #define    CMD      "serveur"
 
 
@@ -79,7 +80,7 @@ int main(int argc, char *argv[]) {
   	struct sockaddr_in adrClient;
   	unsigned int lgAdrClient;
     printf("%s: accepting a connection\n", CMD);
-
+    sem_wait(&MainSem);
     canal = accept(ecoute, (struct sockaddr *)&adrClient, &lgAdrClient);
     printf("Client accepted. \n");
 //    if (adrClient.sin_addr.s_addr == inet_addr("127.0.0.1")){
@@ -134,36 +135,43 @@ void *communicationThread(void *arg) {
     char port_str[40];
     sprintf(port_str,"%d",port);
 
+    char *args[3] = {"client","localhost",port_str};
     while (dataThread->spec.canal != -1){
         sem_wait(&dataThread->spec.waking_sem);
         dataThread->spec.libre = FAUX;
         player* Player = bindPlayerToThread(dataThread);
-        ecrireLigne(dataThread->spec.canal, "Veuillez saisir votre pseudo (20 caractères max) : ");
+        sprintf(ligne,"Veuillez saisir votre pseudo (20 caractères max) : ");
+        ecrireLigne(dataThread->spec.canal,ligne);
+        sprintf(ligne,"waiting input");
+        ecrireLigne(dataThread->spec.canal,ligne);
         lireLigne(dataThread->spec.canal, Player->pseudo);
         while (!dataThread->spec.libre) {
             //DataThread *currentThread = listeDataThread;
             player *currentPlayer = playerList;
-            ecrireLigne(dataThread->spec.canal, "Numéro du joueur\t\tPseudo\t\tStatut\n");
+
             showPlayerList(Player);
             pthread_t *IOThread;
-			IOThread = (pthread_t*)malloc(sizeof(pthread_t));
+            IOThread = (pthread_t*)malloc(sizeof(pthread_t));
             pthread_create(IOThread,NULL,inputThread,Player);
             while(!play){
                 sem_getvalue(&Player->input,&lgLue);
                 if(lgLue){
                     sem_wait(&Player->input);
                     lgLue = 0;
-                    if (strcmp(ligne,"q") == 0){
+                    if (strcmp(&Player->kbInput[0],"q") == 0){
+                        sprintf(ligne,"client exit");
+                        ecrireLigne(dataThread->spec.canal, ligne);
                         unbindPlayer(Player);
                         pthread_exit(NULL);
                     }
-                    else if (strcmp(ligne,"r") == 0){
+                    else if (strcmp(&Player->kbInput[0],"r") == 0){
                         showPlayerList(Player);
                     }
                     else {
-                        int challengedPlayerId = atoi(ligne);
-                        if (challengedPlayerId < 0 && challengedPlayerId > availablePlayers) {
-                            ecrireLigne(dataThread->spec.canal, "Entrée incorrecte, veuillez réessayer.");
+                        int challengedPlayerId = atoi(&Player->kbInput[0]);
+                        if (challengedPlayerId < 0 || challengedPlayerId > availablePlayers) {
+                            sprintf(ligne,"Entrée incorrecte, veuillez réessayer.");
+                            ecrireLigne(dataThread->spec.canal, ligne);
                         }
                         else{
                             currentPlayer = playerList;
@@ -185,7 +193,8 @@ void *communicationThread(void *arg) {
                     ecrireLigne(dataThread->spec.canal, ligne);
                     lireLigne(dataThread->spec.canal, ligne);
                     while(strcmp(ligne,"y") && strcmp(ligne,"n")){
-                        ecrireLigne(dataThread->spec.canal, "Entrée incorrecte\n");
+                        sprintf(ligne,"Entrée incorrecte\n");
+                        ecrireLigne(dataThread->spec.canal, ligne);
                         sprintf(ligne,"%s vous défie ! Accepter ? (y/n)\n",Player->challenger->pseudo);
                         ecrireLigne(dataThread->spec.canal, ligne);
                         lireLigne(dataThread->spec.canal, ligne);
@@ -309,18 +318,31 @@ DataThread *findFreeDataThread(){
 player* bindPlayerToThread(DataThread *dataThread){
     player* currentPlayer = playerList;
     int playerId = 1;
-    while(currentPlayer != NULL){
-        currentPlayer = currentPlayer->next;
-        playerId ++;
+    if (playerList == NULL){
+        playerList = (player*) malloc(sizeof(player));
+        playerList->handler = dataThread;
+        playerList->id = playerId;
+        playerList->next = NULL;
+        sem_init(&playerList->challenged,0,0);
+        sem_init(&playerList->input,0,0);
+        availablePlayers++;
+        return playerList;
     }
-    currentPlayer = (player*) malloc(sizeof(player));
-    currentPlayer->handler = dataThread;
-    currentPlayer->id = playerId;
-    currentPlayer->next = NULL;
-    sem_init(&currentPlayer->challenged,0,0);
-    sem_init(&currentPlayer->input,0,0);
-    availablePlayers++;
-    return currentPlayer;
+    else{
+        playerId ++;
+        while(currentPlayer->next != NULL){
+            currentPlayer = currentPlayer->next;
+            playerId ++;
+        }
+        currentPlayer->next = (player*) malloc(sizeof(player));
+        currentPlayer->next->handler = dataThread;
+        currentPlayer->next->id = playerId;
+        currentPlayer->next->next = NULL;
+        sem_init(&currentPlayer->next->challenged,0,0);
+        sem_init(&currentPlayer->next->input,0,0);
+        availablePlayers++;
+        return currentPlayer->next;
+    }
 }
 
 void unbindPlayer(player* Player){
@@ -342,12 +364,18 @@ void unbindPlayer(player* Player){
 void showPlayerList(player* Player){
     player* currentPlayer = playerList;
     char ligne[LIGNE_MAX];
+    sprintf(ligne,"Numéro du joueur\t\tPseudo\t\tStatut");
+    ecrireLigne(Player->handler->spec.canal,ligne);
     while (currentPlayer != NULL) {
-        sprintf(ligne, "%d\t\t%s\n",currentPlayer->id, currentPlayer->pseudo);
+        sprintf(ligne, "%d\t\t\t\t\t\t%s",currentPlayer->id, currentPlayer->pseudo);
         ecrireLigne(Player->handler->spec.canal, ligne);
         currentPlayer = currentPlayer->next;
     }
-    ecrireLigne(Player->handler->spec.canal, "Pour défier un joueur, tappez son numéro. Pour rafraichir la liste, tappez r. Pour quitter le serveur, tappez q");
+    sprintf(ligne,"Pour défier un joueur, tappez son numéro. Pour rafraichir la liste, tappez r. Pour quitter le serveur, tappez q\n");
+    ecrireLigne(Player->handler->spec.canal, ligne);
+    sprintf(ligne,"waiting input");
+    ecrireLigne(Player->handler->spec.canal, ligne);
+
 }
 
 bool sendChallenge(player* challengedPlayer){

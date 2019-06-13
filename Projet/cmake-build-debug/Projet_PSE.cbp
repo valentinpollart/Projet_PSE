@@ -133,6 +133,12 @@
 		<Unit filename="/home/magister/Documents/PSE/Projet/client.c">
 			<Option target="Test_Client"/>
 		</Unit>
+		<Unit filename="/home/magister/Documents/PSE/Projet/game.c">
+			<Option target="Test_Serveur"/>
+		</Unit>
+		<Unit filename="/home/magister/Documents/PSE/Projet/gameStructs.h">
+			<Option target="Test_Serveur"/>
+		</Unit>
 		<Unit filename="/home/magister/Documents/PSE/Projet/include/dataspec.h">
 			<Option target="Test_Serveur"/>
 			<Option target="Test_Client"/>

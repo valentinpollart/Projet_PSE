@@ -27,14 +27,20 @@ int main(int argc, char *argv[]) {
     if (ret < 0)
         erreur_IO("connect");
     printf("Connecté au serveur !\n");
+    fflush( stdout );
     while (!fin) {
         lireLigne(sock,ligne);
         if (strcmp(ligne,"waiting input") == 0){
             scanf("%s",ligne);
-            ecrireLigne(sock, pseudo);
+            ecrireLigne(sock, ligne);
+        }
+        else if (strcmp(ligne,"client exit") == 0){
+            printf("Déconnecté du serveur. Au revoir !");
+            fin = VRAI;
         }
         else{
-            printf("test");
+            printf("%s\n",ligne);
+            fflush( stdout );
         }
 
 

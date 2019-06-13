@@ -163,6 +163,33 @@ client.c.s:
 	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/client.c.s
 .PHONY : client.c.s
 
+game.o: game.c.o
+
+.PHONY : game.o
+
+# target to build an object file
+game.c.o:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/game.c.o
+.PHONY : game.c.o
+
+game.i: game.c.i
+
+.PHONY : game.i
+
+# target to preprocess a source file
+game.c.i:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/game.c.i
+.PHONY : game.c.i
+
+game.s: game.c.s
+
+.PHONY : game.s
+
+# target to generate assembly for a file
+game.c.s:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/game.c.s
+.PHONY : game.c.s
+
 modules/datathread.o: modules/datathread.c.o
 
 .PHONY : modules/datathread.o
@@ -383,6 +410,9 @@ help:
 	@echo "... client.o"
 	@echo "... client.i"
 	@echo "... client.s"
+	@echo "... game.o"
+	@echo "... game.i"
+	@echo "... game.s"
 	@echo "... modules/datathread.o"
 	@echo "... modules/datathread.i"
 	@echo "... modules/datathread.s"
