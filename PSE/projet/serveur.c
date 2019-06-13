@@ -1,4 +1,5 @@
-#include "pse.h"
+
+#include "game.h"
 
 
 #define    CMD      "serveur"
@@ -12,16 +13,7 @@ short port;
 sem_t MainSem;
 int availablePlayers;
 
-typedef struct _player{
-    int id;
-    char pseudo[20];
-    sem_t input;
-    sem_t challenged;
-    DataThread* handler;
-    struct _player *next;
-    char kbInput[20];
-    struct _player *challenger;
-}player;
+
 
 player* playerList;
 
@@ -34,8 +26,6 @@ DataThread *findFreeDataThread();
 player* bindPlayerToThread(DataThread *dataThread);
 void unbindPlayer(player* Player);
 void showPlayerList(player* player);
-bool sendChallenge(player *challengedPlayer);
-
 
 int main(int argc, char *argv[]) {
 
@@ -130,7 +120,7 @@ void *communicationThread(void *arg) {
     char ligne[LIGNE_MAX];
     int lgLue;
     int challenged;
-    bool play = false;
+    bool play;
     dataThread = (DataThread *)arg;
     char port_str[40];
     sprintf(port_str,"%d",port);
@@ -153,6 +143,7 @@ void *communicationThread(void *arg) {
             pthread_t *IOThread;
             IOThread = (pthread_t*)malloc(sizeof(pthread_t));
             pthread_create(IOThread,NULL,inputThread,Player);
+            play = false;
             while(!play){
                 sem_getvalue(&Player->input,&lgLue);
                 if(lgLue){
@@ -162,7 +153,8 @@ void *communicationThread(void *arg) {
                         sprintf(ligne,"client exit");
                         ecrireLigne(dataThread->spec.canal, ligne);
                         unbindPlayer(Player);
-                        pthread_exit(NULL);
+                        dataThread->spec.libre = VRAI;
+                        play = true;
                     }
                     else if (strcmp(&Player->kbInput[0],"r") == 0){
                         showPlayerList(Player);
@@ -178,10 +170,25 @@ void *communicationThread(void *arg) {
                             while(currentPlayer->id != challengedPlayerId){
                                 currentPlayer = currentPlayer->next;
                             }
-                            play = sendChallenge(currentPlayer);
-                            if(!play){
+                            currentPlayer->challenger = Player;
+                            sem_post(&currentPlayer->challenged);
+                            sem_wait(&Player->challenged);
+                            if(Player->challenger == NULL){
                                 pthread_create(IOThread,NULL,inputThread,Player);
+                                sprintf(ligne,"Défi refusé.");
+                                ecrireLigne(dataThread->spec.canal, ligne);
                             }
+                            else{
+                                printf("Début de la partie");
+                                game *Game = (game*)malloc(sizeof(game));
+                                Game->players[0] = Player;
+                                Game->players[1] = currentPlayer;
+                                pthread_create(IOThread,NULL,inputThread,Player);
+                                sprintf(ligne,"Défi accepté.");
+                                play = true;
+                                pthread_create(&Game->id,NULL,start,Game);
+                            }
+
                         }
                     }
                 }
@@ -189,20 +196,27 @@ void *communicationThread(void *arg) {
                 if(challenged){
                     sem_wait(&Player->challenged);
                     challenged = 0;
-                    sprintf(ligne,"%s vous défie ! Accepter ? (y/n)\n",Player->challenger->pseudo);
+                    sprintf(ligne,"%s vous défie ! Accepter ? (y/n)",Player->challenger->pseudo);
                     ecrireLigne(dataThread->spec.canal, ligne);
+                    sprintf(ligne,"waiting input");
+                    ecrireLigne(dataThread->spec.canal,ligne);
                     lireLigne(dataThread->spec.canal, ligne);
                     while(strcmp(ligne,"y") && strcmp(ligne,"n")){
                         sprintf(ligne,"Entrée incorrecte\n");
                         ecrireLigne(dataThread->spec.canal, ligne);
-                        sprintf(ligne,"%s vous défie ! Accepter ? (y/n)\n",Player->challenger->pseudo);
+                        sprintf(ligne,"%s vous défie ! Accepter ? (y/n)",Player->challenger->pseudo);
                         ecrireLigne(dataThread->spec.canal, ligne);
+                        sprintf(ligne,"waiting input");
+                        ecrireLigne(dataThread->spec.canal,ligne);
                         lireLigne(dataThread->spec.canal, ligne);
                     }
+                    sem_post(&Player->challenger->challenged);
                     if(!strcmp(ligne,"y")){
                         play=true;
+                        Player->challenger->challenger = Player;
                     }
                     else{
+                        Player->challenger->challenger = NULL;
                         showPlayerList(Player);
                     }
                 }
@@ -210,44 +224,13 @@ void *communicationThread(void *arg) {
 
 
             }
-
-
-
+            if (dataThread->spec.libre){
+                break;
+            }
+            sem_wait(&Player->gameDone);
 
         }
-//            lgLue = lireLigne(dataThread->spec.canal, ligne);
-//            if (lgLue < 0)
-//              erreur_IO("lireLigne");
-//            else if (lgLue == 0)
-//              erreur("arret client\n");
-//
-//            printf("%s: reception %d octets : \"%s\"\n", CMD, lgLue, ligne);
-//
-//            if (strcmp(ligne, "fin") == 0) {
-//                printf("serveur: fin client\n");
-//                dataThread->spec.libre = VRAI;
-//            }
-//            else if (strcmp(ligne, "init") == 0) {
-//              printf("serveur: remise a zero journal\n");
-//              fdJournal = remiseAZeroJournal(fdJournal);
-//            }
-//            else if (strcmp(ligne, "fin_serveur") == 0) {
-//              printf("serveur: extinction serveur\n");
-//              dataThread->spec.libre = VRAI;
-//              if (close(dataThread->spec.canal) == -1)
-//                    erreur_IO("fermeture canal");
-//              execve("client",args,NULL);
-//              perror ("execve");
-//                    exit (EXIT_FAILURE);
-//            }
-//            else if (ecrireLigne(fdJournal, ligne) != -1) {
-//                printf("serveur: ligne de %d octets ecrite dans journal\n", lgLue);
-//            }
-//            else
-//              erreur_IO("ecriture journal");
-//            } 	// fin while
         sem_post(&MainSem);
-
     }
     printf("Jeu lancé");
     pthread_exit(NULL);
@@ -317,11 +300,10 @@ DataThread *findFreeDataThread(){
 
 player* bindPlayerToThread(DataThread *dataThread){
     player* currentPlayer = playerList;
-    int playerId = 1;
     if (playerList == NULL){
         playerList = (player*) malloc(sizeof(player));
         playerList->handler = dataThread;
-        playerList->id = playerId;
+        playerList->id = 1;
         playerList->next = NULL;
         sem_init(&playerList->challenged,0,0);
         sem_init(&playerList->input,0,0);
@@ -329,14 +311,12 @@ player* bindPlayerToThread(DataThread *dataThread){
         return playerList;
     }
     else{
-        playerId ++;
         while(currentPlayer->next != NULL){
             currentPlayer = currentPlayer->next;
-            playerId ++;
         }
         currentPlayer->next = (player*) malloc(sizeof(player));
         currentPlayer->next->handler = dataThread;
-        currentPlayer->next->id = playerId;
+        currentPlayer->next->id = currentPlayer->id + 1;
         currentPlayer->next->next = NULL;
         sem_init(&currentPlayer->next->challenged,0,0);
         sem_init(&currentPlayer->next->input,0,0);
@@ -376,8 +356,4 @@ void showPlayerList(player* Player){
     sprintf(ligne,"waiting input");
     ecrireLigne(Player->handler->spec.canal, ligne);
 
-}
-
-bool sendChallenge(player* challengedPlayer){
-    return true;
 }

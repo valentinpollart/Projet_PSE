@@ -175,12 +175,17 @@ void *communicationThread(void *arg) {
                             sem_wait(&Player->challenged);
                             if(Player->challenger == NULL){
                                 pthread_create(IOThread,NULL,inputThread,Player);
+                                sprintf(ligne,"Défi refusé.");
+                                ecrireLigne(dataThread->spec.canal, ligne);
                             }
                             else{
                                 printf("Début de la partie");
                                 game *Game = (game*)malloc(sizeof(game));
                                 Game->players[0] = Player;
                                 Game->players[1] = currentPlayer;
+                                pthread_create(IOThread,NULL,inputThread,Player);
+                                sprintf(ligne,"Défi accepté.");
+                                play = true;
                                 pthread_create(&Game->id,NULL,start,Game);
                             }
 
@@ -191,7 +196,7 @@ void *communicationThread(void *arg) {
                 if(challenged){
                     sem_wait(&Player->challenged);
                     challenged = 0;
-                    sprintf(ligne,"%s",Player->challenger->pseudo);
+                    sprintf(ligne,"%s vous défie ! Accepter ? (y/n)",Player->challenger->pseudo);
                     ecrireLigne(dataThread->spec.canal, ligne);
                     sprintf(ligne,"waiting input");
                     ecrireLigne(dataThread->spec.canal,ligne);
@@ -199,14 +204,14 @@ void *communicationThread(void *arg) {
                     while(strcmp(ligne,"y") && strcmp(ligne,"n")){
                         sprintf(ligne,"Entrée incorrecte\n");
                         ecrireLigne(dataThread->spec.canal, ligne);
-                        sprintf(ligne,"%s vous défie ! Accepter ? (y/n)\n",Player->challenger->pseudo);
+                        sprintf(ligne,"%s vous défie ! Accepter ? (y/n)",Player->challenger->pseudo);
                         ecrireLigne(dataThread->spec.canal, ligne);
                         sprintf(ligne,"waiting input");
                         ecrireLigne(dataThread->spec.canal,ligne);
                         lireLigne(dataThread->spec.canal, ligne);
                     }
                     sem_post(&Player->challenger->challenged);
-                    if(!strcmp(ligne,"y")){
+                    if(!strcmp(&ligne[0],"y")){
                         play=true;
                         Player->challenger->challenger = Player;
                     }

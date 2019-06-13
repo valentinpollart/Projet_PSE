@@ -120,8 +120,8 @@ void Afficher_Board(Case *Plateau,game *Game)
                     break;
                 }
             }
-            sprintf(&ligne[2*j+1],"|");
-            sprintf(&ligne[2*j+2],"%c",Type);
+            sprintf(ligne+2*j+1,"|");
+            sprintf(ligne+2*j+2,"%c",Type);
 		}
         ecrireLigne(Game->players[0]->handler->spec.canal, ligne);
         ecrireLigne(Game->players[1]->handler->spec.canal, ligne);

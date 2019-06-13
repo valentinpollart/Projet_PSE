@@ -76,6 +76,10 @@ msg.h
 
 ../include/resolv.h
 
+/home/magister/Documents/PSE/Projet/game.c
+game.h
+/home/magister/Documents/PSE/Projet/game.h
+
 /home/magister/Documents/PSE/Projet/game.h
 stdio.h
 -
@@ -89,8 +93,4 @@ gameStructs.h
 /home/magister/Documents/PSE/Projet/gameStructs.h
 pse.h
 /home/magister/Documents/PSE/Projet/pse.h
-
-/home/magister/Documents/PSE/Projet/serveur.c
-game.h
-/home/magister/Documents/PSE/Projet/game.h
 
