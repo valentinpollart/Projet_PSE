@@ -8,45 +8,45 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug"/>
+				<Option working_dir="/home/magister/Documents/PSE/Projet/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug"/>
+				<Option working_dir="/home/magister/Documents/PSE/Projet/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug"/>
+				<Option working_dir="/home/magister/Documents/PSE/Projet/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Projet_PSE">
-				<Option output="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Projet_PSE" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug"/>
+				<Option output="/home/magister/Documents/PSE/Projet/cmake-build-debug/Projet_PSE" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/magister/Documents/PSE/Projet/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/."/>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/./include,"/>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/./modules"/>
+					<Add directory="/home/magister/Documents/PSE/Projet/."/>
+					<Add directory="/home/magister/Documents/PSE/Projet/./include,"/>
+					<Add directory="/home/magister/Documents/PSE/Projet/./modules"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
@@ -54,22 +54,22 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projet_PSE"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projet_PSE"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Projet_PSE/fast">
-				<Option output="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Projet_PSE" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug"/>
+				<Option output="/home/magister/Documents/PSE/Projet/cmake-build-debug/Projet_PSE" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/magister/Documents/PSE/Projet/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/."/>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/./include,"/>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/./modules"/>
+					<Add directory="/home/magister/Documents/PSE/Projet/."/>
+					<Add directory="/home/magister/Documents/PSE/Projet/./include,"/>
+					<Add directory="/home/magister/Documents/PSE/Projet/./modules"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
@@ -77,22 +77,22 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projet_PSE/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projet_PSE/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Test_Serveur">
-				<Option output="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Test_Serveur" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug"/>
+				<Option output="/home/magister/Documents/PSE/Projet/cmake-build-debug/Test_Serveur" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/magister/Documents/PSE/Projet/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/."/>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/./include,"/>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/./modules"/>
+					<Add directory="/home/magister/Documents/PSE/Projet/."/>
+					<Add directory="/home/magister/Documents/PSE/Projet/./include,"/>
+					<Add directory="/home/magister/Documents/PSE/Projet/./modules"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
@@ -100,22 +100,22 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 Test_Serveur"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 Test_Serveur"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Test_Serveur/fast">
-				<Option output="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Test_Serveur" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug"/>
+				<Option output="/home/magister/Documents/PSE/Projet/cmake-build-debug/Test_Serveur" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/magister/Documents/PSE/Projet/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/."/>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/./include,"/>
-					<Add directory="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/./modules"/>
+					<Add directory="/home/magister/Documents/PSE/Projet/."/>
+					<Add directory="/home/magister/Documents/PSE/Projet/./include,"/>
+					<Add directory="/home/magister/Documents/PSE/Projet/./modules"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
@@ -123,23 +123,23 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 Test_Serveur/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 Test_Serveur/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/magister/Documents/PSE/Projet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/include/pse.h">
+		<Unit filename="/home/magister/Documents/PSE/Projet/include/pse.h">
 			<Option target="Test_Serveur"/>
 		</Unit>
-		<Unit filename="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/main.c">
+		<Unit filename="/home/magister/Documents/PSE/Projet/main.c">
 			<Option target="Projet_PSE"/>
 		</Unit>
-		<Unit filename="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/serveur.c">
+		<Unit filename="/home/magister/Documents/PSE/Projet/serveur.c">
 			<Option target="Test_Serveur"/>
 		</Unit>
-		<Unit filename="/home/magister/Documents/Programmation_Système/Projet_PSE/Projet/CMakeLists.txt">
+		<Unit filename="/home/magister/Documents/PSE/Projet/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

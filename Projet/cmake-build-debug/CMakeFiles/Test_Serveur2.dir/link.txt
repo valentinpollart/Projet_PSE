@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/Test_Serveur2.dir/serveur-2.c.o  -o Test_Serveur2 
