@@ -12,7 +12,7 @@ typedef struct DataSpec_t {
   int canal;                  /* canal de communication */
   sem_t waking_sem;                  /* semaphore de reveil */
   sem_t input_sem;            /* sémaphore input console */
-	char[20] playerName;
+	char playerName[20];
 } DataSpec;
 
 #endif

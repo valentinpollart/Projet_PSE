@@ -3,11 +3,38 @@ project(Projet_PSE C)
 
 set(CMAKE_C_STANDARD 11)
 
-include_directories(.)
-include_directories(./include, ./modules)
 
-add_executable(Projet_PSE main.c)
-add_executable(Test_Serveur serveur.c include/pse.h)
+
+set(HEADERS
+        include/pse.h
+        include/dataspec.h
+        include/datathread.h
+        include/erreur.h
+        include/ligne.h
+        include/msg.h
+        include/msgbox.h
+        include/resolv.h
+)
+
+set(SRCS
+        modules/datathread.c
+        modules/erreur.c
+        modules/ligne.c
+        modules/msgbox.c
+        modules/msg.c
+        modules/resolv.c
+        )
+
+include_directories(.)
+include_directories(include)
+include_directories(modules)
+find_package(Threads)
+add_executable(Test_Serveur ${HEADERS} ${SRCS} serveur.c)
+add_executable(Test_Client ${HEADERS} ${SRCS} client.c)
+target_link_libraries(Test_Serveur ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(Test_Client ${CMAKE_THREAD_LIBS_INIT})
+
+
 
 
 

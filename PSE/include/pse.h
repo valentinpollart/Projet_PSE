@@ -21,6 +21,7 @@
 #include <netdb.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <stdbool.h>
 
 #include "erreur.h"
 #include "ligne.h"

@@ -65,50 +65,13 @@ CMAKE_SOURCE_DIR = /home/magister/Documents/PSE/Projet
 CMAKE_BINARY_DIR = /home/magister/Documents/PSE/Projet/cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/Projet_PSE.dir
-
-# All Build rule for target.
-CMakeFiles/Projet_PSE.dir/all:
-	$(MAKE) -f CMakeFiles/Projet_PSE.dir/build.make CMakeFiles/Projet_PSE.dir/depend
-	$(MAKE) -f CMakeFiles/Projet_PSE.dir/build.make CMakeFiles/Projet_PSE.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target Projet_PSE"
-.PHONY : CMakeFiles/Projet_PSE.dir/all
-
-# Include target in all.
-all: CMakeFiles/Projet_PSE.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/Projet_PSE.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Projet_PSE.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/Projet_PSE.dir/rule
-
-# Convenience name for target.
-Projet_PSE: CMakeFiles/Projet_PSE.dir/rule
-
-.PHONY : Projet_PSE
-
-# clean rule for target.
-CMakeFiles/Projet_PSE.dir/clean:
-	$(MAKE) -f CMakeFiles/Projet_PSE.dir/build.make CMakeFiles/Projet_PSE.dir/clean
-.PHONY : CMakeFiles/Projet_PSE.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/Projet_PSE.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/Test_Serveur.dir
 
 # All Build rule for target.
 CMakeFiles/Test_Serveur.dir/all:
 	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/depend
 	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=3,4 "Built target Test_Serveur"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=9,10,11,12,13,14,15,16 "Built target Test_Serveur"
 .PHONY : CMakeFiles/Test_Serveur.dir/all
 
 # Include target in all.
@@ -118,7 +81,7 @@ all: CMakeFiles/Test_Serveur.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Test_Serveur.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Test_Serveur.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/Test_Serveur.dir/rule
@@ -135,6 +98,43 @@ CMakeFiles/Test_Serveur.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/Test_Serveur.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/Test_Client.dir
+
+# All Build rule for target.
+CMakeFiles/Test_Client.dir/all:
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/depend
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target Test_Client"
+.PHONY : CMakeFiles/Test_Client.dir/all
+
+# Include target in all.
+all: CMakeFiles/Test_Client.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Test_Client.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles 8
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Test_Client.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/Test_Client.dir/rule
+
+# Convenience name for target.
+Test_Client: CMakeFiles/Test_Client.dir/rule
+
+.PHONY : Test_Client
+
+# clean rule for target.
+CMakeFiles/Test_Client.dir/clean:
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/clean
+.PHONY : CMakeFiles/Test_Client.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/Test_Client.dir/clean
 
 .PHONY : clean
 

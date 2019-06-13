@@ -10,8 +10,9 @@ typedef struct DataSpec_t {
 /* ajouter donnees specifiques après cette ligne */
   int tid;                    /* identifiant logique */
   int canal;                  /* canal de communication */
-  sem_t sem;                  /* semaphore de reveil */
-	char[20] playerName;
+  sem_t waking_sem;                  /* semaphore de reveil */
+  sem_t input_sem;            /* sémaphore input console */
+	char playerName[20];
 } DataSpec;
 
 #endif

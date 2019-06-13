@@ -19,9 +19,15 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/CMakeLanguageInformation.cmake"
   "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/CMakeSystemSpecificInformation.cmake"
   "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/CMakeSystemSpecificInitialize.cmake"
+  "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/CheckIncludeFile.cmake"
+  "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/CheckLibraryExists.cmake"
+  "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/CheckSymbolExists.cmake"
   "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
   "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/Compiler/GNU-C.cmake"
   "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/Compiler/GNU.cmake"
+  "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/FindPackageHandleStandardArgs.cmake"
+  "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/FindPackageMessage.cmake"
+  "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/FindThreads.cmake"
   "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/Platform/Linux-GNU-C.cmake"
   "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/Platform/Linux-GNU.cmake"
   "/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/share/cmake-3.13/Modules/Platform/Linux.cmake"
@@ -42,6 +48,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/Projet_PSE.dir/DependInfo.cmake"
   "CMakeFiles/Test_Serveur.dir/DependInfo.cmake"
+  "CMakeFiles/Test_Client.dir/DependInfo.cmake"
   )

@@ -48,6 +48,11 @@ void Ajouter_Diagonale_BGauche(Case *Plateau, Move **mouvements,Piece *Set_Piece
 void Ajouter_Diagonale_HDroite(Case *Plateau, Move **mouvements,Piece *Set_Pieces,int Indice_Piece);
 void Ajouter_Diagonale_BDroite(Case *Plateau, Move **mouvements,Piece *Set_Pieces,int Indice_Piece);
 void Afficher_Move(Move **mouvements, int Indice);
+bool Test_Move_Valide(Case *Plateau,Piece *Set_Pieces, Move **mouvements,int Ind_Origine,int Ind_Destination,int Indice_Piece);
+bool Test_Checkmate(Case *Plateau,Piece *Set_Pieces,Move **mouvements,int couleur);
+void Afficher_Move_Valide(Case* Plateau,Piece *Set_Pieces,Move ** mouvements,int Indice);
+
+
 
 
 
@@ -402,7 +407,7 @@ void Refresh_Move(Case *Plateau,Piece *Set_Pieces,Move **mouvements,int Indice)
             if(!Test_Border_Haut1(Set_Pieces[Indice].Indice_Case) && !Test_Border_Gauche1(Set_Pieces[Indice].Indice_Case))
             {
             Constructeur = (Move*) malloc(sizeof(Move));
-            *Constructeur = (Move) {.dst = Set_Pieces[Indice].Indice_Case-7,.Suivant = mouvements[Indice]};
+            *Constructeur = (Move) {.dst = Set_Pieces[Indice].Indice_Case+7,.Suivant = mouvements[Indice]};
             mouvements[Indice] = Constructeur;
             }
             if(!Test_Border_Haut1(Set_Pieces[Indice].Indice_Case) && !Test_Border_Droit1(Set_Pieces[Indice].Indice_Case))
@@ -413,14 +418,13 @@ void Refresh_Move(Case *Plateau,Piece *Set_Pieces,Move **mouvements,int Indice)
             }
         break;
     }
-    printf("restestrsef\n");
 }
 
 
 void Bouger_Piece(Case *Plateau,Piece *Set_Pieces,Move **mouvements)
 {
     char origine[2],destination[2];
-    int Ind_Origine,Ind_Destination,Ind_Piece1,Ind_Piece2=0,libre_temp = 0;
+    int Ind_Origine,Ind_Destination,Ind_Piece1,Ind_Piece2=0,libre_temp = 0,couleur_temp;
     Piece *Occupant_Temp;
     bool Test;
     printf("Veuillez selectionner la piece a deplacer : ");
@@ -430,53 +434,52 @@ void Bouger_Piece(Case *Plateau,Piece *Set_Pieces,Move **mouvements)
     {
         printf("Code non valide.\n");
     }
-    printf("%d\n",Ind_Piece2);
     Ind_Piece1 = Plateau[Ind_Origine].Occuppant->Indice;
-    printf("%d\n",Ind_Piece1);
-    printf("coucou %d\n", Ind_Origine);
     Ind_Piece2 = Ind_Piece1;
-    printf("%d\n",Ind_Piece2);
     Refresh_Move(Plateau,Set_Pieces,mouvements,Ind_Piece1);
-    Afficher_Move(mouvements,Ind_Piece1);
+    Afficher_Move_Valide(Plateau,Set_Pieces,mouvements,Ind_Piece1);
     printf("Veuillez selectionner sa destination : ");
     scanf("%s", destination);
     Ind_Destination = Coo_to_Ind(destination);
-    printf("Joli %d %d\n", Ind_Piece2,Ind_Destination);
-    Test = Test_Move_Liste(Ind_Piece1, Ind_Destination, mouvements);
-    printf("Test2\n");
+    Test = Test_Move_Valide(Plateau,Set_Pieces,mouvements,Ind_Origine,Ind_Destination,Ind_Piece1);
     if(Test)
     {
-        if(Plateau[Ind_Destination].libre == 1 || (Plateau[Ind_Destination].libre == 0 && Plateau[Ind_Destination].Occuppant->couleur != Set_Pieces[Ind_Piece1].couleur))
-        {
-        Occupant_Temp = Plateau[Ind_Destination].Occuppant;
-        libre_temp = Plateau[Ind_Destination].libre;
         Set_Pieces[Ind_Piece1].Indice_Case = Ind_Destination;
         Plateau[Ind_Origine] = (Case) {.libre = 1,.Occuppant = NULL};
         Plateau[Ind_Destination]= (Case) {.libre = 0,.Occuppant = &Set_Pieces[Ind_Piece1]};
-        printf("Celui là : %d\n",Set_Pieces[Ind_Piece1].Indice_Case);
-        if(Test_Echec(Plateau,Set_Pieces,mouvements,Set_Pieces[Ind_Piece1].couleur))
+        switch(Set_Pieces[Ind_Piece1].couleur)
         {
-                    Set_Pieces[Ind_Piece1].Indice_Case = Ind_Origine;
-                    Plateau[Ind_Origine] = (Case) {.libre = 0,.Occuppant = &Set_Pieces[Ind_Piece1]};
-                    Plateau[Ind_Destination]= (Case) {.libre = libre_temp,.Occuppant = Occupant_Temp};
-                    printf("Code non valide1.\n");
-        }
-        }
-        else
+        case 0:
+        if(Test_Echec(Plateau,Set_Pieces,mouvements,1))
         {
-            printf("Code non valide que je cherchais.\n");
+            if(Test_Checkmate(Plateau,Set_Pieces,mouvements,1))
+            {
+                printf("%d en echec et mat",1);
+            }
+            else{printf("Poire\n");}
+        }
+        break;
+        case 1 :
+        if(Test_Echec(Plateau,Set_Pieces,mouvements,0))
+           {
+
+               if(Test_Checkmate(Plateau,Set_Pieces,mouvements,0))
+               {
+                   printf("%d En echec et mat.\n",0);
+               }
+           }
+        break;
         }
     }
     else
     {
-        printf("Code non valide3.\n");
+        printf("Code non valide.\n");
     }
 }
 
 void Liberer(Move **mouvements,int indice)
 {
     mouvements[indice] = NULL;
-    printf("retest\n");
 }
 
 void Init_Mouvements(Move **mouvements)
@@ -708,15 +711,12 @@ bool Test_Border2(int Indice)
 bool Test_Move_Liste(int Indice,int Ind_Destination,Move **mouvements)
 {
     bool Test = false;
-    printf("Testr<sd %d\n", Indice);
     Move *Curseur;
     if(mouvements[Indice] != NULL)
     {
-    printf("Test3\n");
     Curseur = mouvements[Indice];
     while(Curseur != NULL && Test == false)
     {
-        printf("Test\n");
         if(Ind_Destination == Curseur->dst) Test = true;
         Curseur = Curseur->Suivant;
     }
@@ -741,8 +741,7 @@ bool Test_Echec(Case *Plateau,Piece *Set_Pieces,Move **mouvements,int couleur)
             Curseur = mouvements[i];
             while(Curseur!=NULL)
             {
-                printf("Test\n");
-                if(Set_Pieces[27].Indice_Case == Curseur->dst )
+                if(Set_Pieces[28].Indice_Case == Curseur->dst )
                 {
                     Test = true;
                 }
@@ -781,5 +780,94 @@ void Afficher_Move(Move **mouvements, int Indice)
     {
         printf("%d\n",Curseur->dst);
         Curseur = Curseur->Suivant;
+    }
+}
+
+bool Test_Move_Valide(Case *Plateau,Piece *Set_Pieces, Move **mouvements,int Ind_Origine,int Ind_Destination,int Ind_Piece)
+{
+    Piece *Occupant_Temp;
+    int libre_temp;
+    bool Test = Test_Move_Liste(Ind_Piece, Ind_Destination, mouvements);
+    if(Test)
+    {
+        if(Plateau[Ind_Destination].libre == 1 || (Plateau[Ind_Destination].libre == 0 && Plateau[Ind_Destination].Occuppant->couleur != Set_Pieces[Ind_Piece].couleur))
+        {
+        Occupant_Temp = Plateau[Ind_Destination].Occuppant;
+        libre_temp = Plateau[Ind_Destination].libre;
+        Set_Pieces[Ind_Piece].Indice_Case = Ind_Destination;
+        Plateau[Ind_Origine] = (Case) {.libre = 1,.Occuppant = NULL};
+        Plateau[Ind_Destination]= (Case) {.libre = 0,.Occuppant = &Set_Pieces[Ind_Piece]};
+        if(Test_Echec(Plateau,Set_Pieces,mouvements,Set_Pieces[Ind_Piece].couleur))
+        {
+                    Test = false;
+        }
+            Set_Pieces[Ind_Piece].Indice_Case = Ind_Origine;
+            Plateau[Ind_Origine] = (Case) {.libre = 0,.Occuppant = &Set_Pieces[Ind_Piece]};
+            Plateau[Ind_Destination]= (Case) {.libre = libre_temp,.Occuppant = Occupant_Temp};
+        }
+        else
+        {
+            Test = false;
+        }
+    }
+    return Test;
+}
+
+bool Test_Checkmate(Case *Plateau,Piece *Set_Pieces,Move **mouvements,int couleur)
+{
+    bool Test=true;
+    Move *Curseur;
+    if(couleur == 0)
+    {
+        for(int i=16;i<=31;i++)
+        {
+            Refresh_Move(Plateau,Set_Pieces,mouvements,i);
+        }
+        for(int i = 16;i<=31;i++)
+        {
+            Curseur = mouvements[i];
+            while(Curseur!=NULL)
+            {
+                if(Test_Move_Valide(Plateau,Set_Pieces,mouvements,Set_Pieces[i].Indice_Case,Curseur->dst,i))
+                {
+                    Test=false;
+                }
+                Curseur = Curseur->Suivant;
+            }
+        }
+        return Test;
+    }
+    else if(couleur == 1)
+    {
+        for(int i=0;i<=15;i++)
+        {
+            Refresh_Move(Plateau,Set_Pieces,mouvements,i);
+        }
+        for(int i = 0;i<=15;i++)
+        {
+            Curseur = mouvements[i];
+            while(Curseur!=NULL)
+            {
+                if(Test_Move_Valide(Plateau,Set_Pieces,mouvements,Set_Pieces[i].Indice_Case,Curseur->dst,i))
+                {
+                    Test=false;
+                }
+                Curseur = Curseur->Suivant;
+            }
+        }
+    }
+    return Test;
+}
+
+void Afficher_Move_Valide(Case* Plateau,Piece *Set_Pieces,Move ** mouvements,int Indice)
+{
+    Move* Curseur=mouvements[Indice];
+    while(Curseur!=NULL)
+    {
+        if(Test_Move_Valide(Plateau,Set_Pieces,mouvements,Set_Pieces[Indice].Indice_Case,Curseur->dst,Indice))
+        {
+            printf("%d\n",Curseur->dst);
+        }
+        Curseur=Curseur->Suivant;
     }
 }

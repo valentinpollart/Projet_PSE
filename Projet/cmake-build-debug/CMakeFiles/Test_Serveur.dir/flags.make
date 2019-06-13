@@ -6,5 +6,5 @@ C_FLAGS = -g   -std=gnu11
 
 C_DEFINES = 
 
-C_INCLUDES = -I/home/magister/Documents/PSE/Projet/. -I/home/magister/Documents/PSE/Projet/./include, -I/home/magister/Documents/PSE/Projet/./modules 
+C_INCLUDES = -I/home/magister/Documents/PSE/Projet/. -I/home/magister/Documents/PSE/Projet/include -I/home/magister/Documents/PSE/Projet/modules 
 

@@ -57,9 +57,87 @@ include CMakeFiles/Test_Serveur.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Test_Serveur.dir/flags.make
 
+CMakeFiles/Test_Serveur.dir/modules/datathread.c.o: CMakeFiles/Test_Serveur.dir/flags.make
+CMakeFiles/Test_Serveur.dir/modules/datathread.c.o: ../modules/datathread.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Test_Serveur.dir/modules/datathread.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test_Serveur.dir/modules/datathread.c.o   -c /home/magister/Documents/PSE/Projet/modules/datathread.c
+
+CMakeFiles/Test_Serveur.dir/modules/datathread.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Test_Serveur.dir/modules/datathread.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/magister/Documents/PSE/Projet/modules/datathread.c > CMakeFiles/Test_Serveur.dir/modules/datathread.c.i
+
+CMakeFiles/Test_Serveur.dir/modules/datathread.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Test_Serveur.dir/modules/datathread.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/magister/Documents/PSE/Projet/modules/datathread.c -o CMakeFiles/Test_Serveur.dir/modules/datathread.c.s
+
+CMakeFiles/Test_Serveur.dir/modules/erreur.c.o: CMakeFiles/Test_Serveur.dir/flags.make
+CMakeFiles/Test_Serveur.dir/modules/erreur.c.o: ../modules/erreur.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Test_Serveur.dir/modules/erreur.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test_Serveur.dir/modules/erreur.c.o   -c /home/magister/Documents/PSE/Projet/modules/erreur.c
+
+CMakeFiles/Test_Serveur.dir/modules/erreur.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Test_Serveur.dir/modules/erreur.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/magister/Documents/PSE/Projet/modules/erreur.c > CMakeFiles/Test_Serveur.dir/modules/erreur.c.i
+
+CMakeFiles/Test_Serveur.dir/modules/erreur.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Test_Serveur.dir/modules/erreur.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/magister/Documents/PSE/Projet/modules/erreur.c -o CMakeFiles/Test_Serveur.dir/modules/erreur.c.s
+
+CMakeFiles/Test_Serveur.dir/modules/ligne.c.o: CMakeFiles/Test_Serveur.dir/flags.make
+CMakeFiles/Test_Serveur.dir/modules/ligne.c.o: ../modules/ligne.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Test_Serveur.dir/modules/ligne.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test_Serveur.dir/modules/ligne.c.o   -c /home/magister/Documents/PSE/Projet/modules/ligne.c
+
+CMakeFiles/Test_Serveur.dir/modules/ligne.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Test_Serveur.dir/modules/ligne.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/magister/Documents/PSE/Projet/modules/ligne.c > CMakeFiles/Test_Serveur.dir/modules/ligne.c.i
+
+CMakeFiles/Test_Serveur.dir/modules/ligne.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Test_Serveur.dir/modules/ligne.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/magister/Documents/PSE/Projet/modules/ligne.c -o CMakeFiles/Test_Serveur.dir/modules/ligne.c.s
+
+CMakeFiles/Test_Serveur.dir/modules/msgbox.c.o: CMakeFiles/Test_Serveur.dir/flags.make
+CMakeFiles/Test_Serveur.dir/modules/msgbox.c.o: ../modules/msgbox.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/Test_Serveur.dir/modules/msgbox.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test_Serveur.dir/modules/msgbox.c.o   -c /home/magister/Documents/PSE/Projet/modules/msgbox.c
+
+CMakeFiles/Test_Serveur.dir/modules/msgbox.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Test_Serveur.dir/modules/msgbox.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/magister/Documents/PSE/Projet/modules/msgbox.c > CMakeFiles/Test_Serveur.dir/modules/msgbox.c.i
+
+CMakeFiles/Test_Serveur.dir/modules/msgbox.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Test_Serveur.dir/modules/msgbox.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/magister/Documents/PSE/Projet/modules/msgbox.c -o CMakeFiles/Test_Serveur.dir/modules/msgbox.c.s
+
+CMakeFiles/Test_Serveur.dir/modules/msg.c.o: CMakeFiles/Test_Serveur.dir/flags.make
+CMakeFiles/Test_Serveur.dir/modules/msg.c.o: ../modules/msg.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/Test_Serveur.dir/modules/msg.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test_Serveur.dir/modules/msg.c.o   -c /home/magister/Documents/PSE/Projet/modules/msg.c
+
+CMakeFiles/Test_Serveur.dir/modules/msg.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Test_Serveur.dir/modules/msg.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/magister/Documents/PSE/Projet/modules/msg.c > CMakeFiles/Test_Serveur.dir/modules/msg.c.i
+
+CMakeFiles/Test_Serveur.dir/modules/msg.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Test_Serveur.dir/modules/msg.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/magister/Documents/PSE/Projet/modules/msg.c -o CMakeFiles/Test_Serveur.dir/modules/msg.c.s
+
+CMakeFiles/Test_Serveur.dir/modules/resolv.c.o: CMakeFiles/Test_Serveur.dir/flags.make
+CMakeFiles/Test_Serveur.dir/modules/resolv.c.o: ../modules/resolv.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/Test_Serveur.dir/modules/resolv.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test_Serveur.dir/modules/resolv.c.o   -c /home/magister/Documents/PSE/Projet/modules/resolv.c
+
+CMakeFiles/Test_Serveur.dir/modules/resolv.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Test_Serveur.dir/modules/resolv.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/magister/Documents/PSE/Projet/modules/resolv.c > CMakeFiles/Test_Serveur.dir/modules/resolv.c.i
+
+CMakeFiles/Test_Serveur.dir/modules/resolv.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Test_Serveur.dir/modules/resolv.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/magister/Documents/PSE/Projet/modules/resolv.c -o CMakeFiles/Test_Serveur.dir/modules/resolv.c.s
+
 CMakeFiles/Test_Serveur.dir/serveur.c.o: CMakeFiles/Test_Serveur.dir/flags.make
 CMakeFiles/Test_Serveur.dir/serveur.c.o: ../serveur.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Test_Serveur.dir/serveur.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/Test_Serveur.dir/serveur.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Test_Serveur.dir/serveur.c.o   -c /home/magister/Documents/PSE/Projet/serveur.c
 
 CMakeFiles/Test_Serveur.dir/serveur.c.i: cmake_force
@@ -72,15 +150,27 @@ CMakeFiles/Test_Serveur.dir/serveur.c.s: cmake_force
 
 # Object files for target Test_Serveur
 Test_Serveur_OBJECTS = \
+"CMakeFiles/Test_Serveur.dir/modules/datathread.c.o" \
+"CMakeFiles/Test_Serveur.dir/modules/erreur.c.o" \
+"CMakeFiles/Test_Serveur.dir/modules/ligne.c.o" \
+"CMakeFiles/Test_Serveur.dir/modules/msgbox.c.o" \
+"CMakeFiles/Test_Serveur.dir/modules/msg.c.o" \
+"CMakeFiles/Test_Serveur.dir/modules/resolv.c.o" \
 "CMakeFiles/Test_Serveur.dir/serveur.c.o"
 
 # External object files for target Test_Serveur
 Test_Serveur_EXTERNAL_OBJECTS =
 
+Test_Serveur: CMakeFiles/Test_Serveur.dir/modules/datathread.c.o
+Test_Serveur: CMakeFiles/Test_Serveur.dir/modules/erreur.c.o
+Test_Serveur: CMakeFiles/Test_Serveur.dir/modules/ligne.c.o
+Test_Serveur: CMakeFiles/Test_Serveur.dir/modules/msgbox.c.o
+Test_Serveur: CMakeFiles/Test_Serveur.dir/modules/msg.c.o
+Test_Serveur: CMakeFiles/Test_Serveur.dir/modules/resolv.c.o
 Test_Serveur: CMakeFiles/Test_Serveur.dir/serveur.c.o
 Test_Serveur: CMakeFiles/Test_Serveur.dir/build.make
 Test_Serveur: CMakeFiles/Test_Serveur.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable Test_Serveur"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/magister/Documents/PSE/Projet/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable Test_Serveur"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Test_Serveur.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

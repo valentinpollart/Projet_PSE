@@ -1,4 +1,5 @@
-#include "include/pse.h"
+#include "pse.h"
+
 
 #define    CMD      "serveur"
 
@@ -139,12 +140,16 @@ void *communicationThread(void *arg) {
         sem_wait(&dataThread->spec.waking_sem);
         dataThread->spec.libre = FAUX;
         player* Player = bindPlayerToThread(dataThread);
-        ecrireLigne(dataThread->spec.canal, "Veuillez saisir votre pseudo (20 caractères max) : ");
+        sprintf(ligne,"Veuillez saisir votre pseudo (20 caractères max) : ");
+        ecrireLigne(dataThread->spec.canal,ligne);
+        sprintf(ligne,"waiting output");
+        ecrireLigne(dataThread->spec.canal,ligne);
         lireLigne(dataThread->spec.canal, Player->pseudo);
         while (!dataThread->spec.libre) {
             //DataThread *currentThread = listeDataThread;
             player *currentPlayer = playerList;
-            ecrireLigne(dataThread->spec.canal, "Numéro du joueur\t\tPseudo\t\tStatut\n");
+            sprintf(ligne,"Numéro du joueur\t\tPseudo\t\tStatut\n");
+            ecrireLigne(dataThread->spec.canal,ligne );
             showPlayerList(Player);
             pthread_t *IOThread;
             pthread_create(IOThread,NULL,inputThread,Player);
@@ -163,7 +168,8 @@ void *communicationThread(void *arg) {
                     else {
                         int challengedPlayerId = atoi(ligne);
                         if (challengedPlayerId < 0 && challengedPlayerId > availablePlayers) {
-                            ecrireLigne(dataThread->spec.canal, "Entrée incorrecte, veuillez réessayer.");
+                            sprintf(ligne,"Entrée incorrecte, veuillez réessayer.");
+                            ecrireLigne(dataThread->spec.canal, ligne);
                         }
                         else{
                             currentPlayer = playerList;
@@ -185,7 +191,8 @@ void *communicationThread(void *arg) {
                     ecrireLigne(dataThread->spec.canal, ligne);
                     lireLigne(dataThread->spec.canal, ligne);
                     while(strcmp(ligne,"y") && strcmp(ligne,"n")){
-                        ecrireLigne(dataThread->spec.canal, "Entrée incorrecte\n");
+                        sprintf(ligne,"Entrée incorrecte\n");
+                        ecrireLigne(dataThread->spec.canal, ligne);
                         sprintf(ligne,"%s vous défie ! Accepter ? (y/n)\n",Player->challenger->pseudo);
                         ecrireLigne(dataThread->spec.canal, ligne);
                         lireLigne(dataThread->spec.canal, ligne);
@@ -240,6 +247,7 @@ void *communicationThread(void *arg) {
         sem_post(&MainSem);
 
     }
+    printf("Jeu lancé");
     pthread_exit(NULL);
 }
 
@@ -346,7 +354,8 @@ void showPlayerList(player* Player){
         ecrireLigne(Player->handler->spec.canal, ligne);
         currentPlayer = currentPlayer->next;
     }
-    ecrireLigne(Player->handler->spec.canal, "Pour défier un joueur, tappez son numéro. Pour rafraichir la liste, tappez r. Pour quitter le serveur, tappez q");
+    sprintf(ligne,"Pour défier un joueur, tappez son numéro. Pour rafraichir la liste, tappez r. Pour quitter le serveur, tappez q");
+    ecrireLigne(Player->handler->spec.canal, ligne);
 }
 
 bool sendChallenge(player* challengedPlayer){

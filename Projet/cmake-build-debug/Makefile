@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/magister/Documents/PSE/Projet/cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -77,6 +66,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/home/magister/Downloads/CLion-2018.3.4/clion-2018.3.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,19 +111,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Projet_PSE
-
-# Build rule for target.
-Projet_PSE: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Projet_PSE
-.PHONY : Projet_PSE
-
-# fast build rule for target.
-Projet_PSE/fast:
-	$(MAKE) -f CMakeFiles/Projet_PSE.dir/build.make CMakeFiles/Projet_PSE.dir/build
-.PHONY : Projet_PSE/fast
-
-#=============================================================================
 # Target rules for targets named Test_Serveur
 
 # Build rule for target.
@@ -136,32 +123,225 @@ Test_Serveur/fast:
 	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/build
 .PHONY : Test_Serveur/fast
 
-main.o: main.c.o
+#=============================================================================
+# Target rules for targets named Test_Client
 
-.PHONY : main.o
+# Build rule for target.
+Test_Client: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Test_Client
+.PHONY : Test_Client
+
+# fast build rule for target.
+Test_Client/fast:
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/build
+.PHONY : Test_Client/fast
+
+client.o: client.c.o
+
+.PHONY : client.o
 
 # target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/Projet_PSE.dir/build.make CMakeFiles/Projet_PSE.dir/main.c.o
-.PHONY : main.c.o
+client.c.o:
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/client.c.o
+.PHONY : client.c.o
 
-main.i: main.c.i
+client.i: client.c.i
 
-.PHONY : main.i
+.PHONY : client.i
 
 # target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/Projet_PSE.dir/build.make CMakeFiles/Projet_PSE.dir/main.c.i
-.PHONY : main.c.i
+client.c.i:
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/client.c.i
+.PHONY : client.c.i
 
-main.s: main.c.s
+client.s: client.c.s
 
-.PHONY : main.s
+.PHONY : client.s
 
 # target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/Projet_PSE.dir/build.make CMakeFiles/Projet_PSE.dir/main.c.s
-.PHONY : main.c.s
+client.c.s:
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/client.c.s
+.PHONY : client.c.s
+
+modules/datathread.o: modules/datathread.c.o
+
+.PHONY : modules/datathread.o
+
+# target to build an object file
+modules/datathread.c.o:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/datathread.c.o
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/datathread.c.o
+.PHONY : modules/datathread.c.o
+
+modules/datathread.i: modules/datathread.c.i
+
+.PHONY : modules/datathread.i
+
+# target to preprocess a source file
+modules/datathread.c.i:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/datathread.c.i
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/datathread.c.i
+.PHONY : modules/datathread.c.i
+
+modules/datathread.s: modules/datathread.c.s
+
+.PHONY : modules/datathread.s
+
+# target to generate assembly for a file
+modules/datathread.c.s:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/datathread.c.s
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/datathread.c.s
+.PHONY : modules/datathread.c.s
+
+modules/erreur.o: modules/erreur.c.o
+
+.PHONY : modules/erreur.o
+
+# target to build an object file
+modules/erreur.c.o:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/erreur.c.o
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/erreur.c.o
+.PHONY : modules/erreur.c.o
+
+modules/erreur.i: modules/erreur.c.i
+
+.PHONY : modules/erreur.i
+
+# target to preprocess a source file
+modules/erreur.c.i:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/erreur.c.i
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/erreur.c.i
+.PHONY : modules/erreur.c.i
+
+modules/erreur.s: modules/erreur.c.s
+
+.PHONY : modules/erreur.s
+
+# target to generate assembly for a file
+modules/erreur.c.s:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/erreur.c.s
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/erreur.c.s
+.PHONY : modules/erreur.c.s
+
+modules/ligne.o: modules/ligne.c.o
+
+.PHONY : modules/ligne.o
+
+# target to build an object file
+modules/ligne.c.o:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/ligne.c.o
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/ligne.c.o
+.PHONY : modules/ligne.c.o
+
+modules/ligne.i: modules/ligne.c.i
+
+.PHONY : modules/ligne.i
+
+# target to preprocess a source file
+modules/ligne.c.i:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/ligne.c.i
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/ligne.c.i
+.PHONY : modules/ligne.c.i
+
+modules/ligne.s: modules/ligne.c.s
+
+.PHONY : modules/ligne.s
+
+# target to generate assembly for a file
+modules/ligne.c.s:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/ligne.c.s
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/ligne.c.s
+.PHONY : modules/ligne.c.s
+
+modules/msg.o: modules/msg.c.o
+
+.PHONY : modules/msg.o
+
+# target to build an object file
+modules/msg.c.o:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/msg.c.o
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/msg.c.o
+.PHONY : modules/msg.c.o
+
+modules/msg.i: modules/msg.c.i
+
+.PHONY : modules/msg.i
+
+# target to preprocess a source file
+modules/msg.c.i:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/msg.c.i
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/msg.c.i
+.PHONY : modules/msg.c.i
+
+modules/msg.s: modules/msg.c.s
+
+.PHONY : modules/msg.s
+
+# target to generate assembly for a file
+modules/msg.c.s:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/msg.c.s
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/msg.c.s
+.PHONY : modules/msg.c.s
+
+modules/msgbox.o: modules/msgbox.c.o
+
+.PHONY : modules/msgbox.o
+
+# target to build an object file
+modules/msgbox.c.o:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/msgbox.c.o
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/msgbox.c.o
+.PHONY : modules/msgbox.c.o
+
+modules/msgbox.i: modules/msgbox.c.i
+
+.PHONY : modules/msgbox.i
+
+# target to preprocess a source file
+modules/msgbox.c.i:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/msgbox.c.i
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/msgbox.c.i
+.PHONY : modules/msgbox.c.i
+
+modules/msgbox.s: modules/msgbox.c.s
+
+.PHONY : modules/msgbox.s
+
+# target to generate assembly for a file
+modules/msgbox.c.s:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/msgbox.c.s
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/msgbox.c.s
+.PHONY : modules/msgbox.c.s
+
+modules/resolv.o: modules/resolv.c.o
+
+.PHONY : modules/resolv.o
+
+# target to build an object file
+modules/resolv.c.o:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/resolv.c.o
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/resolv.c.o
+.PHONY : modules/resolv.c.o
+
+modules/resolv.i: modules/resolv.c.i
+
+.PHONY : modules/resolv.i
+
+# target to preprocess a source file
+modules/resolv.c.i:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/resolv.c.i
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/resolv.c.i
+.PHONY : modules/resolv.c.i
+
+modules/resolv.s: modules/resolv.c.s
+
+.PHONY : modules/resolv.s
+
+# target to generate assembly for a file
+modules/resolv.c.s:
+	$(MAKE) -f CMakeFiles/Test_Serveur.dir/build.make CMakeFiles/Test_Serveur.dir/modules/resolv.c.s
+	$(MAKE) -f CMakeFiles/Test_Client.dir/build.make CMakeFiles/Test_Client.dir/modules/resolv.c.s
+.PHONY : modules/resolv.c.s
 
 serveur.o: serveur.c.o
 
@@ -196,13 +376,31 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... Projet_PSE"
 	@echo "... Test_Serveur"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... rebuild_cache"
+	@echo "... Test_Client"
+	@echo "... client.o"
+	@echo "... client.i"
+	@echo "... client.s"
+	@echo "... modules/datathread.o"
+	@echo "... modules/datathread.i"
+	@echo "... modules/datathread.s"
+	@echo "... modules/erreur.o"
+	@echo "... modules/erreur.i"
+	@echo "... modules/erreur.s"
+	@echo "... modules/ligne.o"
+	@echo "... modules/ligne.i"
+	@echo "... modules/ligne.s"
+	@echo "... modules/msg.o"
+	@echo "... modules/msg.i"
+	@echo "... modules/msg.s"
+	@echo "... modules/msgbox.o"
+	@echo "... modules/msgbox.i"
+	@echo "... modules/msgbox.s"
+	@echo "... modules/resolv.o"
+	@echo "... modules/resolv.i"
+	@echo "... modules/resolv.s"
 	@echo "... serveur.o"
 	@echo "... serveur.i"
 	@echo "... serveur.s"
